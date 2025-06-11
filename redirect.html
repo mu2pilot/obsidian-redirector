@@ -4,25 +4,29 @@
     <meta charset="UTF-8">
     <title>Redirecting...</title>
     <script>
-      window.onload = function() {
+      function redirectAndClose() {
         var params = new URLSearchParams(window.location.search);
         var url = params.get('url');
         if (url) {
-          document.body.innerText = "Redirecting to your app...";
+          window.location.href = url;
           setTimeout(function() {
-            window.location.href = url;
-            // Try to close the tab after a short delay
-            setTimeout(function() {
-              window.close();
-            }, 500);
+            window.close();
           }, 500);
-        } else {
-          document.body.innerText = "No URL provided.";
         }
       }
     </script>
   </head>
   <body>
-    Redirecting...
+    <button onclick="redirectAndClose()">Open in App</button>
+    <p>If your app doesn't open, copy and paste this link:<br>
+      <span id="thelink"></span>
+    </p>
+    <script>
+      var params = new URLSearchParams(window.location.search);
+      var url = params.get('url');
+      if (url) {
+        document.getElementById('thelink').innerText = url;
+      }
+    </script>
   </body>
 </html>
