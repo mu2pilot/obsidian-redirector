@@ -8,11 +8,14 @@
         var params = new URLSearchParams(window.location.search);
         var url = params.get('url');
         if (url) {
-          // Show a message for a moment, then redirect
           document.body.innerText = "Redirecting to your app...";
           setTimeout(function() {
             window.location.href = url;
-          }, 500); // 0.5 second delay for user feedback
+            // Try to close the tab after a short delay
+            setTimeout(function() {
+              window.close();
+            }, 500);
+          }, 500);
         } else {
           document.body.innerText = "No URL provided.";
         }
